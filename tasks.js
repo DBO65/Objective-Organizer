@@ -98,9 +98,9 @@ export const updateTasks = async (req,res) => {
         const updatedTask = await Task.findByIdAndUpdate(ID, task, {new: true})
 
         if (updatedTask.Completion_Status) {
-            taskQueue.remove(updatedTask._id.toString()); // 🟢 Remove completed tasks
+            taskQueue.remove(updatedTask._id.toString()); 
         } else {
-            taskQueue.update(updatedTask); // 🟢 Otherwise, update normally
+            taskQueue.update(updatedTask); 
         }
 
         res.status(200).json({
