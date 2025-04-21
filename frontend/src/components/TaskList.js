@@ -9,9 +9,13 @@ function (TaskList({tasks, onDeleteTask, onEditTask}){
       <ul>
         {sorted.map(task => (
           <li key={task._id}>
-          {task.title} (Priority: {task.priority})
-          <button onClick={() => onDeleteTask(task._id)}>Delete</button>
-          <button onClick={() => onEditTask(task}>Edit</button>
+            <strong>{task.title}</strong>
+            (Priority: {task.priority})
+            {task.deadline && (
+              <span> - Due: {new Date(task.deadline).toLocaleDateString()}</span>
+            )}
+            <button onClick={() => onDeleteTask(task._id)}>Delete</button>
+            <button onClick={() => onEditTask(task}>Edit</button>
        </li>
      ))}
    </ul>
