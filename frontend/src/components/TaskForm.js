@@ -1,8 +1,8 @@
 import React, {useState} from 'react';
 
 //a form component to input new task data
-function TaskForm({onAddTask}) {
-  const [title, setTitle] = usetate('');
+function TaskForm({onAddTask, onUpdateTask, taskToEdit}) {
+  const [title, setTitle] = useState('');
   const [priority, setPriority] = useState(1); //default priority
 
   useEffect(() => {
@@ -38,6 +38,12 @@ function TaskForm({onAddTask}) {
       <input
         value={title}
         onChange{(e) => setTitle(e.target.value)}
+        onKeyDown={(e) => {
+          if (e.key === 'Escape'){
+            setTitle('');
+            setPriority(1);
+          }
+        }}
         placeholder="Task title"
         required
       />
