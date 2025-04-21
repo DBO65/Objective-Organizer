@@ -44,7 +44,22 @@ function (TaskList({tasks, onDeleteTask, onEditTask}){
         {sorted.map(task => (
           <li key={task._id}>
             <strong>{task.title}</strong>
-            {' '} (Priority: {task.priority})
+            //COLOR CODED PRIORITY BADGE
+            <span style={{
+              marginLeft: '0.5em',
+              padding: '0.25em 0.5em',
+              borderRadius: '6px',
+              backgroundColor:
+                task.priority >= 8 ? '#ff4d4f': //red
+                task.priority >= 5 ? '#faad14': //yellow
+                '#52c41a', //green
+              color: 'white',
+              fontWeight: 'bold',
+              fontSize: '0.75em'
+            }}>
+              (Priority: {task.priority})
+            </span>
+                    
             {task.deadline && (
               <span> - Due: {new Date(task.deadline).toLocaleDateString()}</span>
             )}
