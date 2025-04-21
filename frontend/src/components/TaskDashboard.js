@@ -37,7 +37,7 @@ function TaskDashboard(){
     await axios.delete('http://localhost:3000/api/tasks/${id}');
     getTasks(); //get the tasks again after deleting
     } catch (err) {
-      setError('Failed to add task');
+      setError('Failed to delete task');
     }
   };
 
@@ -47,8 +47,9 @@ function TaskDashboard(){
 
   const updateTask = async (updatedTask) => {
     try {
-      await axios.delete('http://localhost:3000/api/tasks/${updatedTask._id}', updatedTask);
+      await axios.put('http://localhost:3000/api/tasks/${updatedTask._id}', updatedTask);
     setTaskToEdit(null); //clear edit mode
+    getTasks();
     } catch (err) {
       setError('Failed to update task');
     }
