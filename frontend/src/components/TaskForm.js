@@ -53,9 +53,16 @@ function TaskForm({onAddTask, onUpdateTask, taskToEdit}) {
         required
       />
       <select value={priority} onChange={(e) => setPriority(Number(e.target.value))}>
-        <option value={1}>Low</option>
-        <option value={2}>Medium</option>
-        <option value={3}>High</option>
+        {Array.from({length: 10}, (_, i) => (
+          <option key={i + 1}>
+            {i + 1}
+          </option>
+        ))}
+          
+        //<option value={1}>Low</option>
+        //<option value={2}>Medium</option>
+        //<option value={3}>High</option>
+
       </select>
       <input
           type="date"
