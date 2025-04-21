@@ -2,10 +2,16 @@ import React from 'react';
 
 //displays a sorted list of tasks
 function (TaskList({tasks, onDeleteTask, onEditTask}){
+  const [sortMode, setSortMode] = useState('deadline'); //"deadline" or "priority"
   const now = new Date();
   
   //sort tasks by a hybrid score based on deadline and manual priority
   const sorted = [...tasks].sort((a, b) => {
+    if (sortMode === 'priority'){
+      //sort in descneding order: 10 (highest) to 1 (lowest)
+      return b.priority - a.priority;
+    } else {
+    //hybrid deadline-based sort
     const getScore = (task) => {
       const deadline = new Date(task.deadline || '9999-12-31');
       const timeToDeadline = (deadline - now) / (1000 * 60 * 60 * 24); //in days
@@ -17,9 +23,23 @@ function (TaskList({tasks, onDeleteTask, onEditTask}){
     };
 
     return getScore(b) - getScore(a); //higher score = higher priority
+    }
   });
 
   return (
+    <div>
+    //SORT MODE SELECTOR
+    <label htmlFor="sort-mode">Sort by: </label>
+    <select
+      id="sort-mode"
+      value={sortMode}
+      onChange{(e) => setSortMode(e.target.value)}
+    >
+      <option value="deadline">Deadline</option>
+      <option value="priority">Priority</option>
+    </select>
+
+      //TASK LIST//
       <ul>
         {sorted.map(task => (
           <li key={task._id}>
@@ -33,6 +53,7 @@ function (TaskList({tasks, onDeleteTask, onEditTask}){
        </li>
      ))}
    </ul>
+  </div>
  );
 }
 
