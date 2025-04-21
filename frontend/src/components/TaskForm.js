@@ -4,14 +4,17 @@ import React, {useState} from 'react';
 function TaskForm({onAddTask, onUpdateTask, taskToEdit}) {
   const [title, setTitle] = useState('');
   const [priority, setPriority] = useState(1); //default priority
+  const [deadline, setDeadline] = useState('');
 
   useEffect(() => {
     if (taskToEdit) {
       setTitle(taskToEdit.title);
       setPriority(taskToEdit.priority);
+      setDeadline(taskToEdit.deadline ? taskToEdit.deadline.slice(0, 10) : '');
     } else {
       setTitle('');
       setPriority(1);
+      setDeadline('');
     }
   }, [taskToEdit]);
 
@@ -20,6 +23,7 @@ function TaskForm({onAddTask, onUpdateTask, taskToEdit}) {
     const taskData;
       title,
       priority,
+      deadline,
       ...(taskToEdit && {_id: taskToEdit._id}) //include id if editing
   };
      
@@ -31,6 +35,7 @@ function TaskForm({onAddTask, onUpdateTask, taskToEdit}) {
      
     setTitle('');
     setPriority(1); //reset after submit
+    setDeadline('');
   };
 
   return (
@@ -52,6 +57,12 @@ function TaskForm({onAddTask, onUpdateTask, taskToEdit}) {
         <option value={2}>Medium</option>
         <option value={3}>High</option>
       </select>
+      <input
+          type="date"
+          value={deadline}
+          onChange{(e) => setDeadline(e.target.value)}
+      />
+        
       <button type="submit">
           {taskToEdit ? 'Update Task' : 'Add Task'}
       </button>
