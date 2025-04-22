@@ -24,6 +24,7 @@ This is the template for Project 3 repositories. It includes all the assignment 
 			- [Issues](#issues-1)
 			- [Bonus Documentation](#bonus-documentation)
 - [Instructions for Running the Code](#code-running-instructions)
+        - [
 
 # Documentation and resources on how to use GitHub for Project 3
 ## Getting Started with the Project
