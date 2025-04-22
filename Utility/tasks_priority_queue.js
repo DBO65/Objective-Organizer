@@ -62,18 +62,39 @@ export default class PriorityQueue {
         return min;
     }
 
-    // Remove an item from the heap by its task _id
     remove(taskId) {
-        const index = this.heap.findIndex(entry => entry.item._id.toString() === taskId);
-        if (index === -1) return;
-
-        const last = this.heap.pop();
-        if (index === this.heap.length) return;
-
-            this.heap[index] = last;
-            this.bubbleDown(index);
-            this.bubbleUp(index);
+      // find the spot
+      const index = this.heap.findIndex(entry =>
+        entry.item._id.equals(taskId)
+      );
+      if (index < 0) return;             // not found
+    
+      // if it's the last element, just drop it
+      if (index === this.heap.length - 1) {
+        this.heap.pop();
+        delete this.indexMap[taskId];    // if you maintain a map
+        return;
+      }
+    
+      // otherwise swap in the last and pop
+      const last = this.heap.pop();
+      this.heap[index] = last;
+      this.indexMap[last.item._id] = index;  // update map
+    
+      // only bubble in the direction needed
+      const parentIdx = this.parentIndex(index);
+      if (
+        index > 0 &&
+        this.compare(this.heap[index], this.heap[parentIdx]) < 0
+      ) {
+        this.bubbleUp(index);
+      } else {
+        this.bubbleDown(index);
+      }
+      
+      delete this.indexMap[taskId];
     }
+
 
 
     // Peek at the item with lowest priority
