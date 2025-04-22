@@ -1,7 +1,7 @@
-## COP3530 - Project 3
+<h1> COP3530 - Project 3 </h1>
 This is the template for Project 3 repositories. It includes all the assignment instructions and documentation to help you use GitHub.
 
-## Table of Contents
+<h2> Table of Contents </h2>
 
 - [Documentation and resources on how to use GitHub for Project 3](#documentation-and-resources-on-how-to-use-github-for-project-3)
 	- [Getting Started with the Project](#getting-started-with-the-project)
