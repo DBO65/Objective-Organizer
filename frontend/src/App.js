@@ -10,7 +10,11 @@ function App() {
           fontSize: '2rem',
           fontWeight: '600',
           marginBottom: '0.3rem',
-          color: '#0021A5'
+          color: '#0021A5',
+          textTransform: 'uppercase',         // all caps
+          //textDecoration: 'underline',        // underline
+          //textDecorationColor: '#0021A5',     // Use UF blue for the underline
+          //textUnderlineOffset: '5px'
         }}>
           Objective Organizer
         </h1>
@@ -29,6 +33,3 @@ function App() {
 }
 
 export default App;
-
-
-
