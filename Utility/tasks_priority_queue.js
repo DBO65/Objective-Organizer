@@ -62,6 +62,20 @@ export default class PriorityQueue {
         return min;
     }
 
+    // Remove an item from the heap by its task _id
+    remove(taskId) {
+        const index = this.heap.findIndex(entry => entry.item._id.toString() === taskId);
+        if (index === -1) return;
+
+        const last = this.heap.pop();
+        if (index === this.heap.length) return;
+
+            this.heap[index] = last;
+            this.bubbleDown(index);
+            this.bubbleUp(index);
+    }
+
+
     // Peek at the item with lowest priority
     peek() {
         return this.isEmpty() ? null : this.heap[0].item;
