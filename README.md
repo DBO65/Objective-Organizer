@@ -24,7 +24,11 @@ This is the template for Project 3 repositories. It includes all the assignment 
 			- [Issues](#issues-1)
 			- [Bonus Documentation](#bonus-documentation)
 - [Instructions for Running the Code](#code-running-instructions)
-        - [
+        - [1. Download and Extract the Project Files](#download-and-extract-project-files)
+        - [2. Install Node.js](#install-node.js)
+        - [3. Start the Backend Server](#start-backend-server)
+        - [4. Start the Frontend React App](#start-frontend-react-app)
+        - [5. Test the API (Optional)](#test-the-api)
 
 # Documentation and resources on how to use GitHub for Project 3
 ## Getting Started with the Project
@@ -199,3 +203,6 @@ These sites are specifically referred to in the rest of the documentation provid
 #### Bonus Documentation
 - [Planning and Tracking Your Project](https://docs.github.com/en/issues/planning-and-tracking-with-projects)
 - [Undo changes, commits, pushes, etc.](https://sethrobertson.github.io/GitFixUm/fixup.html)
+
+# Instructions for Running the Code
+Welcome to **Objective Organizer**, a simple full-stack task manager built with Node.js, Express, Mongoose, and React. Follow these steps to run the project locally on your machine.
