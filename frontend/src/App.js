@@ -1,5 +1,5 @@
 import React from 'react';
-import TaskDashboard from '.components/TaskDashboard';
+import TaskDashboard from './components/TaskDashboard';
 
 //top-level component rendering the task dashboard
 function App() {
@@ -12,3 +12,4 @@ function App() {
 }
 
 export default App;
+
