@@ -58,18 +58,32 @@ function TaskDashboard(){
   return (
     <div>
     {error && <div style={{color: 'red'}}>{error}</div>}
-    <TaskForm 
-      onAddTask={addTask}
-      onUpdateTask={updateTask}
-      taskToEdit={taskToEdit}
-    />
-    <TaskList 
-        tasks={tasks} 
-        onDeleteTask={deleteTask}
-        onEditTask={startEditTask}
-    />
-  </div>
-);
+
+    {/* FLEX LAYOUT*/}
+    <div style={{
+        display: 'flex',
+        alignItems: 'flex-start',
+        justifyContent: 'center',
+        gap: '2rem',
+        flexWrap: 'wrap'
+      }}>
+        <div style={{ flex: '1', maxWidth: '400px' }}>
+          <TaskForm
+            onAddTask={addTask}
+            onUpdateTask={updateTask}
+            taskToEdit={taskToEdit}
+          />
+        </div>
+        <div style={{ flex: '2', minWidth: '400px' }}>
+          <TaskList
+            tasks={tasks}
+            onDeleteTask={deleteTask}
+            onEditTask={startEditTask}
+          />
+        </div>
+      </div>
+    </div>
+  );
 }
 
 export default TaskDashboard;
