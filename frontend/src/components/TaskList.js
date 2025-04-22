@@ -40,7 +40,8 @@ function TaskList({ tasks, onDeleteTask, onEditTask }) {
             padding: '1rem',
             marginBottom: '1rem',
             boxShadow: '0 2px 5px rgba(0,0,0,0.1)',
-            backgroundColor: '#fff'
+            backgroundColor: '#fff',
+            position: 'relative'
           }}>
             <div style={{ fontSize: '1.1rem', fontWeight: '600', marginBottom: '0.25rem' }}>{task.Task_Name}</div>
             <div>Task ID: {task.Task_ID}</div>
@@ -51,16 +52,18 @@ function TaskList({ tasks, onDeleteTask, onEditTask }) {
             <div>Status: {task.Completion_Status ? '✅ Completed' : '❌ Incomplete'}</div>
 
             <div style={{
-              marginTop: '0.5rem',
-              backgroundColor:
-                task.Priority_Level >= 8 ? '#ff4d4f' :
-                task.Priority_Level >= 5 ? '#faad14' :
-                '#52c41a',
-              color: 'white',
-              padding: '0.25rem 0.5rem',
-              borderRadius: '4px',
-              display: 'inline-block',
-              fontWeight: 'bold'
+               position: 'absolute',
+               top: '1rem',
+               right: '1rem',
+               backgroundColor:
+               task.Priority_Level >= 8 ? '#ff4d4f' :
+               task.Priority_Level >= 5 ? '#faad14' :
+               '#52c41a',
+               color: 'white',
+               padding: '0.25rem 0.5rem',
+               borderRadius: '4px',
+               fontWeight: 'bold',
+               fontSize: '0.8rem'
             }}>
               Priority: {task.Priority_Level}
             </div>
