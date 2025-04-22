@@ -250,4 +250,4 @@ webpack compiled successfully
 6. The website will open in your default browser (e.g., Chrome or Edge).
 
 ## Step 5: Test the Backend API (Optional)
-To view backendtask data directly, visit: [http://localhost:5000/api/tasks]
+To view backendtask data directly, visit [http://localhost:5000/api/tasks](http://localhost:5000/api/tasks)
