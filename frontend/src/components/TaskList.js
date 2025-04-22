@@ -1,75 +1,69 @@
-import React from 'react';
+import React, { useState } from 'react';
 
-//displays a sorted list of tasks
-function (TaskList({tasks, onDeleteTask, onEditTask}){
-  const [sortMode, setSortMode] = useState('deadline'); //"deadline" or "priority"
+function TaskList({ tasks, onDeleteTask, onEditTask }) {
+  const [sortMode, setSortMode] = useState('deadline');
   const now = new Date();
-  
-  //sort tasks by a hybrid score based on deadline and manual priority
+
   const sorted = [...tasks].sort((a, b) => {
-    if (sortMode === 'priority'){
-      //sort in descneding order: 10 (highest) to 1 (lowest)
-      return b.priority - a.priority;
+    if (sortMode === 'priority') {
+      return b.Priority_Level - a.Priority_Level;
     } else {
-    //hybrid deadline-based sort
-    const getScore = (task) => {
-      const deadline = new Date(task.deadline || '9999-12-31');
-      const timeToDeadline = (deadline - now) / (1000 * 60 * 60 * 24); //in days
-
-      const normalizedPriority = 10 - (task.priority || 1); //higher priority = more weight
-      const urgencyScore = Math.max(0, 30 - timeToDeadline); //max 30 points
-
-      return urgencyScore + normalizedPriority * 3; //may need to change the weight, if need be
-    };
-
-    return getScore(b) - getScore(a); //higher score = higher priority
+      const getScore = (task) => {
+        const deadline = new Date(task.Deadline || '9999-12-31');
+        const timeToDeadline = (deadline - now) / (1000 * 60 * 60 * 24);
+        const normalizedPriority = 10 - (task.Priority_Level || 1);
+        const urgencyScore = Math.max(0, 30 - timeToDeadline);
+        return urgencyScore + normalizedPriority * 3;
+      };
+      return getScore(b) - getScore(a);
     }
   });
 
   return (
     <div>
-    //SORT MODE SELECTOR
-    <label htmlFor="sort-mode">Sort by: </label>
-    <select
-      id="sort-mode"
-      value={sortMode}
-      onChange{(e) => setSortMode(e.target.value)}
-    >
-      <option value="deadline">Deadline</option>
-      <option value="priority">Priority</option>
-    </select>
+      <label htmlFor="sort-mode">Sort by: </label>
+      <select
+        id="sort-mode"
+        value={sortMode}
+        onChange={(e) => setSortMode(e.target.value)}
+      >
+        <option value="deadline">Deadline</option>
+        <option value="priority">Priority</option>
+      </select>
 
-      //TASK LIST//
       <ul>
         {sorted.map(task => (
           <li key={task._id}>
-            <strong>{task.title}</strong>
-            //COLOR CODED PRIORITY BADGE
+            <strong>{task.Task_Name}</strong>
+            <div>Task ID: {task.Task_ID}</div>
+            <div>Assigned: {new Date(task.Date_Assigned).toLocaleDateString()}</div>
+            <div>Deadline: {new Date(task.Deadline).toLocaleDateString()}</div>
+            <div>Constraints: {task.Task_Constraints}</div>
+            <div>Subtasks: {task.Subtask}</div>
+            <div>Status: {task.Completion_Status ? '✅ Completed' : '❌ Incomplete'}</div>
+
             <span style={{
               marginLeft: '0.5em',
               padding: '0.25em 0.5em',
               borderRadius: '6px',
               backgroundColor:
-                task.priority >= 8 ? '#ff4d4f': //red
-                task.priority >= 5 ? '#faad14': //yellow
-                '#52c41a', //green
+                task.Priority_Level >= 8 ? '#ff4d4f' :
+                task.Priority_Level >= 5 ? '#faad14' :
+                '#52c41a',
               color: 'white',
               fontWeight: 'bold',
               fontSize: '0.75em'
             }}>
-              (Priority: {task.priority})
+              (Priority: {task.Priority_Level})
             </span>
-                    
-            {task.deadline && (
-              <span> - Due: {new Date(task.deadline).toLocaleDateString()}</span>
-            )}
+
             <button onClick={() => onDeleteTask(task._id)}>Delete</button>
-            <button onClick={() => onEditTask(task}>Edit</button>
-       </li>
-     ))}
-   </ul>
-  </div>
- );
+            <button onClick={() => onEditTask(task)}>Edit</button>
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
 }
 
 export default TaskList;
