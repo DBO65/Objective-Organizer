@@ -224,6 +224,7 @@ You need **Node.js** (which includes `npm`) to run this project.
 2. Navigate to the project folder: cd Objective-Organizer
 3. Run the backend server: node server.js
 4. If successful, you'll see output similar to:
+
    Reparsing as ES module because module syntax was detected...
    MongoDB Connected: <your-cluster>
    Server started at http://localhost:5000
@@ -233,10 +234,11 @@ You need **Node.js** (which includes `npm`) to run this project.
 ## Step 4: Start the Frontend (React App)
 1. Keep the backend terminal open.
 2. Open a new Command Prompt window.
-3. Navigate to the frontend folder: cd Objective-Organizer\frontend
-4. Start the frontend: npm start
+3. Navigate to the frontend folder: `cd Objective-Organizer\frontend`
+4. Start the frontend: `npm start`
 5. You should see output like:
-   Compiled successfully!
+
+Compiled successfully!
 
 You can now view frontend in the browser.
 
@@ -247,6 +249,7 @@ Note that the development build is not optimized.
 To create a production build, use npm run build.
 
 webpack compiled successfully
+
 6. The website will open in your default browser (e.g., Chrome or Edge).
 
 ## Step 5: Test the Backend API (Optional)
