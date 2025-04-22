@@ -24,11 +24,11 @@ This is the template for Project 3 repositories. It includes all the assignment 
 			- [Issues](#issues-1)
 			- [Bonus Documentation](#bonus-documentation)
 - [Instructions for Running the Code](#code-running-instructions)
-        - [Step 1. Download and Extract the Project Files](#download-and-extract-the-project)
-        - [Step 2. Install Node.js](#install-node.js)
-        - [Step 3. Start the Backend Server](#start-the-backend-server)
-        - [Step 4. Start the Frontend React App](#start-the-frontend-react-app)
-        - [Step 5. Test the API (Optional)](#test-the-api-(optional))
+        - [Step 1: Download and Extract the Project Files](#download-and-extract-the-project)
+        - [Step 2: Install Node.js](#install-node.js)
+        - [Step 3: Start the Backend Server](#start-the-backend-server)
+        - [Step 4: Start the Frontend React App](#start-the-frontend-react-app)
+        - [Step 5: Test the API (Optional)](#test-the-api-(optional))
 
 # Documentation and resources on how to use GitHub for Project 3
 ## Getting Started with the Project
