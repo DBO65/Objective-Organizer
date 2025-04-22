@@ -16,8 +16,8 @@ function TaskDashboard(){
 
   const getTasks = async () => {
     try {
-    const response = await axios.get('http://localhost:3000/api/tasks');
-    setTasks(response.data);
+    const response = await axios.get('/api/tasks');
+    setTasks(response.data.data);
   } catch (err) {
     setError('Failed to load tasks');
   }  
@@ -25,7 +25,7 @@ function TaskDashboard(){
 
   const addTask = async (task) => {
     try {
-    await axios.post('http://localhost:3000/api/tasks', task);
+    await axios.post('/api/tasks', task);
     getTasks(); //get the task again after adding it
     } catch (err) {
       setError('Failed to add task');
@@ -34,7 +34,7 @@ function TaskDashboard(){
 
   const deleteTask = async (id) => {
     try {
-    await axios.delete('http://localhost:3000/api/tasks/${id}');
+    await axios.delete(`/api/tasks/${id}`);
     getTasks(); //get the tasks again after deleting
     } catch (err) {
       setError('Failed to delete task');
@@ -47,7 +47,7 @@ function TaskDashboard(){
 
   const updateTask = async (updatedTask) => {
     try {
-      await axios.put('http://localhost:3000/api/tasks/${updatedTask._id}', updatedTask);
+      await axios.put(`/api/tasks/${updatedTask._id}`, updatedTask);
     setTaskToEdit(null); //clear edit mode
     getTasks();
     } catch (err) {
