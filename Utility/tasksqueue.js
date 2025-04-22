@@ -25,7 +25,7 @@ class TaskQueue {
 
     // Remove a deleted task
     remove(taskId) {
-        this.pq.remove(taskId);                         // 🟢 Built‑in heap removal
+        this.pq.remove(taskId);                         // Built‑in heap removal
         delete this.taskMap[taskId];
     }
 
