@@ -206,3 +206,48 @@ These sites are specifically referred to in the rest of the documentation provid
 
 # Instructions for Running the Code
 Welcome to **Objective Organizer**, a simple full-stack task manager built with Node.js, Express, Mongoose, and React. Follow these steps to run the project locally on your machine.
+
+## Step 1. Download and Extract the Project
+1. Head to the main repository page.
+2. Click the green **Code** button and select **Download ZIP**.
+3. Locate the ZIP file in your file explorer and **extract** (unzip) it.
+4. Ensure all files and folders are properly placed after extraction.
+
+## Step 2: Install Node.js
+You need **Node.js** (which includes `npm`) to run this project.
+- If you don't already have Node.js:
+  1. Visit [https://nodejs.org/en](https://nodejs.org/en)
+  2. Click **Download** and follow the installation instructions.
+
+## Step 3: Start the Backend Server
+1. Open a **Command Prompt** window (recommended on Windows).
+2. Navigate to the project folder: cd Objective-Organizer
+3. Run the backend server: node server.js
+4. If successful, you'll see output similar to:
+   Reparsing as ES module because module syntax was detected...
+   MongoDB Connected: <your-cluster>
+   Server started at http://localhost:5000
+
+   The backend is now running!
+   
+## Step 4: Start the Frontend (React App)
+1. Keep the backend terminal open.
+2. Open a new Command Prompt window.
+3. Navigate to the frontend folder: cd Objective-Organizer\frontend
+4. Start the frontend: npm start
+5. You should see output like:
+   Compiled successfully!
+
+You can now view frontend in the browser.
+
+  Local:            http://localhost:3000
+  On Your Network:  http://<your-ip>:3000
+
+Note that the development build is not optimized.
+To create a production build, use npm run build.
+
+webpack compiled successfully
+6. The website will open in your default browser (e.g., Chrome or Edge).
+
+## Step 5: Test the Backend API (Optional)
+To view backendtask data directly, visit: [http://localhost:5000/api/tasks]
