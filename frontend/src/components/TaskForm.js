@@ -1,123 +1,130 @@
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 
-//a form component to input new task data
-function TaskForm({onAddTask, onUpdateTask, taskToEdit}) {
+function TaskForm({ onAddTask, onUpdateTask, taskToEdit }) {
   const [title, setTitle] = useState('');
-  const [priority, setPriority] = useState(1); //default priority
+  const [priority, setPriority] = useState(1);
   const [deadline, setDeadline] = useState('');
   const [assigned, setAssigned] = useState('');
   const [constraints, setConstraints] = useState('');
   const [subtaskCount, setSubtaskCount] = useState(0);
   const [completed, setCompleted] = useState(false);
+  const [taskId, setTaskId] = useState('');
 
   useEffect(() => {
     if (taskToEdit) {
-      setTitle(taskToEdit.title);
-      setPriority(taskToEdit.PriorityLevel);
-      setDeadline(taskToEdit.deadline ? taskToEdit.deadline.slice(0, 10) : '');
+      setTaskId(taskToEdit.Task_ID);
+      setTitle(taskToEdit.Task_Name);
+      setPriority(taskToEdit.Priority_Level);
+      setDeadline(taskToEdit.Deadline ? taskToEdit.Deadline.slice(0, 10) : '');
+      setAssigned(taskToEdit.Date_Assigned ? taskToEdit.Date_Assigned.slice(0, 10) : '');
+      setConstraints(taskToEdit.Task_Constraints || '');
+      setSubtaskCount(taskToEdit.Subtask || 0);
+      setCompleted(taskToEdit.Completion_Status || false);
     } else {
+      setTaskId('');
       setTitle('');
       setPriority(1);
       setDeadline('');
+      setAssigned('');
+      setConstraints('');
+      setSubtaskCount(0);
+      setCompleted(false);
     }
   }, [taskToEdit]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
     const taskData = {
-      title,
-      priority,
-      deadline,
-      assigned,
-      constraints,
-      Number(subtaskCount),
-      completed,
-      ...(taskToEdit && {_id: taskToEdit._id}) //include id if editing
-  };
-     
-    if (taskToEdit){
+      Task_ID: Number(taskId),
+      Task_Name: title,
+      Priority_Level: Number(priority),
+      Deadline: deadline,
+      Date_Assigned: assigned,
+      Task_Constraints: constraints,
+      Subtask: Number(subtaskCount),
+      Completion_Status: completed,
+      ...(taskToEdit && { _id: taskToEdit._id }),
+    };
+
+    if (taskToEdit) {
       onUpdateTask(taskData);
     } else {
       onAddTask(taskData);
     }
-     
+
+    // Reset form
+    setTaskId('');
     setTitle('');
-    setPriority(1); //reset after submit
+    setPriority(1);
     setDeadline('');
+    setAssigned('');
     setConstraints('');
     setSubtaskCount(0);
     setCompleted(false);
-    setPriority(1);
   };
 
   return (
     <form onSubmit={handleSubmit}>
       <input
+        type="text"
+        placeholder="Task title"
         value={title}
         onChange={(e) => setTitle(e.target.value)}
-        onKeyDown={(e) => {
-          if (e.key === 'Escape'){
-            setTitle('');
-            setPriority(1);
-          }
-        }}
-        placeholder="Task title"
         required
       />
       <select value={priority} onChange={(e) => setPriority(Number(e.target.value))}>
-        {Array.from({length: 10}, (_, i) => (
+        {Array.from({ length: 10 }, (_, i) => (
           <option key={i + 1} value={i + 1}>
             {i + 1}
           </option>
         ))}
-          
-        //<option value={1}>Low</option>
-        //<option value={2}>Medium</option>
-        //<option value={3}>High</option>
-
       </select>
       <input
-          type="Deadline"
-          value={deadline}
-          onChange={(e) => setDeadline(e.target.value)}
-          required
+        type="date"
+        value={deadline}
+        onChange={(e) => setDeadline(e.target.value)}
+        required
       />
       <input
-         placeholder="Date Assigned"
-         type="date"
-         value={assigned}
-         onChange={(e) => setAssigned(e.target.value)}
-         required
+        type="date"
+        placeholder="Date Assigned"
+        value={assigned}
+        onChange={(e) => setAssigned(e.target.value)}
+        required
       />
       <input
-         placeholder="Constraints"
-         value={constraints}
-         onChange={(e) => setConstraints(e.target.value)}
-         required
+        type="text"
+        placeholder="Constraints"
+        value={constraints}
+        onChange={(e) => setConstraints(e.target.value)}
+        required
       />
       <input
-         placeholder="number"
-         type="Subtask Count"
-         value={subtaskCount}
-         onChange={(e) => setSubtaskCount(e.target.value)}
-         min="0"
+        type="number"
+        placeholder="Subtask Count"
+        value={subtaskCount}
+        onChange={(e) => setSubtaskCount(Number(e.target.value))}
+        min="0"
       />
-      
+      <input
+        type="number"
+        placeholder="Task ID"
+        value={taskId}
+        onChange={(e) => setTaskId(Number(e.target.value))}
+        required
+      />
       <label>
-         Completed:
-         <input
-            type="checkbox"
-            checked={completed}
-            onChange={(e) => setCompleted(e.target.checked)}
-            required
-       /> 
-        
-      <button type="submit">
-          {taskToEdit ? 'Update Task' : 'Add Task'}
-      </button>
+        Completed:
+        <input
+          type="checkbox"
+          checked={completed}
+          onChange={(e) => setCompleted(e.target.checked)}
+        />
+      </label>
+      <button type="submit">{taskToEdit ? 'Update Task' : 'Add Task'}</button>
     </form>
   );
 }
 
 export default TaskForm;
-
