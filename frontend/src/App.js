@@ -7,10 +7,10 @@ function App() {
       {/* Heading Section */}
       <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
         <h1 style={{
-          fontSize: '2rem',
-          fontWeight: '600',
-          marginBottom: '0.3rem',
-          color: '#0021A5',
+          fontSize: '2rem',          //large font
+          fontWeight: '600',         //bold
+          marginBottom: '0.3rem',     //spacing below heading
+          color: '#0021A5',          //blue color
           textTransform: 'uppercase',         // all caps
           //textDecoration: 'underline',        // underline
           //textDecorationColor: '#0021A5',     // Use UF blue for the underline
@@ -18,9 +18,10 @@ function App() {
         }}>
           Objective Organizer
         </h1>
+       {/* Subheading Section */}
         <p style={{
-          fontSize: '1rem',
-          color: '#0021A5'
+          fontSize: '1rem',       //smaller font
+          color: '#0021A5'        //same blue
         }}>
           Crush Your Goals, One Task at a Time!
         </p>
