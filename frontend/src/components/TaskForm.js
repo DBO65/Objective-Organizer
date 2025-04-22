@@ -65,55 +65,78 @@ function TaskForm({ onAddTask, onUpdateTask, taskToEdit }) {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <input
-        type="text"
-        placeholder="Task title"
-        value={title}
-        onChange={(e) => setTitle(e.target.value)}
-        required
-      />
-      <select value={priority} onChange={(e) => setPriority(Number(e.target.value))}>
-        {Array.from({ length: 10 }, (_, i) => (
-          <option key={i + 1} value={i + 1}>
-            {i + 1}
-          </option>
-        ))}
-      </select>
-      <input
-        type="date"
-        value={deadline}
-        onChange={(e) => setDeadline(e.target.value)}
-        required
-      />
-      <input
-        type="date"
-        placeholder="Date Assigned"
-        value={assigned}
-        onChange={(e) => setAssigned(e.target.value)}
-        required
-      />
-      <input
-        type="text"
-        placeholder="Constraints"
-        value={constraints}
-        onChange={(e) => setConstraints(e.target.value)}
-        required
-      />
-      <input
-        type="number"
-        placeholder="Subtask Count"
-        value={subtaskCount}
-        onChange={(e) => setSubtaskCount(Number(e.target.value))}
-        min="0"
-      />
-      <input
-        type="number"
-        placeholder="Task ID"
-        value={taskId}
-        onChange={(e) => setTaskId(Number(e.target.value))}
-        required
-      />
+    <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
+      <label>
+        Task Title:
+        <input
+          type="text"
+          value={title}
+          onChange={(e) => setTitle(e.target.value)}
+          required
+        />
+      </label>
+
+      <label>
+        Priority Level:
+        <select value={priority} onChange={(e) => setPriority(Number(e.target.value))}>
+          {Array.from({ length: 10 }, (_, i) => (
+            <option key={i + 1} value={i + 1}>
+              {i + 1}
+            </option>
+          ))}
+        </select>
+      </label>
+
+      <label>
+        Deadline:
+        <input
+          type="date"
+          value={deadline}
+          onChange={(e) => setDeadline(e.target.value)}
+          required
+        />
+      </label>
+
+      <label>
+        Date Assigned:
+        <input
+          type="date"
+          value={assigned}
+          onChange={(e) => setAssigned(e.target.value)}
+          required
+        />
+      </label>
+
+      <label>
+        Task Constraints:
+        <input
+          type="text"
+          value={constraints}
+          onChange={(e) => setConstraints(e.target.value)}
+          required
+        />
+      </label>
+
+      <label>
+        Subtask Count:
+        <input
+          type="number"
+          value={subtaskCount}
+          onChange={(e) => setSubtaskCount(Number(e.target.value))}
+          min="0"
+        />
+      </label>
+
+      <label>
+        Task ID:
+        <input
+          type="number"
+          value={taskId}
+          onChange={(e) => setTaskId(Number(e.target.value))}
+          required
+        />
+      </label>
+
       <label>
         Completed:
         <input
@@ -122,6 +145,7 @@ function TaskForm({ onAddTask, onUpdateTask, taskToEdit }) {
           onChange={(e) => setCompleted(e.target.checked)}
         />
       </label>
+
       <button type="submit">{taskToEdit ? 'Update Task' : 'Add Task'}</button>
     </form>
   );
