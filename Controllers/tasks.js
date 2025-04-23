@@ -154,3 +154,19 @@ export const getTaskById = (req, res) => {
         data: task }
     );
 };
+
+// Search by custom Task_ID field (user-defined)
+export const getTaskByTaskID = async (req, res) => {
+  const { Task_ID } = req.params;
+
+  try {
+    const task = await Task.findOne({ Task_ID: parseInt(Task_ID) });
+    if (!task) {
+      return res.status(404).json({ success: false, message: "Task not found" });
+    }
+    return res.status(200).json({ success: true, data: task });
+  } catch (err) {
+    console.error("Error fetching by Task_ID:", err);
+    res.status(500).json({ success: false, message: "Server error" });
+  }
+};
