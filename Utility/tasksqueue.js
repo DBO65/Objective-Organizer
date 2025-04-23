@@ -1,18 +1,23 @@
-
+// Import the min-heap implementation and the Mongoose Task model
 import PriorityQueue from "./tasks_priority_queue.js";
 import Task from "../Models/tasks.js";
 
 class TaskQueue {
     constructor() {
+        // The priority queue (min-heap) storing task objects by Priority_Level
         this.pq = new PriorityQueue();
-        this.taskMap = {}                  //Hashmap used for O(1) lookups
+        // A hashmap mapping task._id → task for O(1) direct lookups
+        this.taskMap = {}                  
     }
 
     // Load all existing tasks into the heap on server start
     async init() {
+        // Fetch all Task documents
         const all = await Task.find({});
         all.forEach(task => {
+            // Enqueue each task into the heap using its priority
             this.pq.enqueue(task, task.Priority_Level);
+            // Store it in the hashmap for quick getById lookups
             this.taskMap[task._id.toString()] = task;
         });
     }
@@ -25,7 +30,9 @@ class TaskQueue {
 
     // Remove a deleted task
     remove(taskId) {
-        this.pq.remove(taskId);                         // Built‑in heap removal
+        // Built‑in heap removal
+        this.pq.remove(taskId);  
+        // Remove the entry from the hashmap
         delete this.taskMap[taskId];
     }
 
@@ -37,17 +44,21 @@ class TaskQueue {
 
     // Snapshot of _all_ tasks in priority order:
     getAllSorted() {
-        // clone the heap array, build a new PQ on it, then drain it
+        // clone the heap array, so it doesn't mess with the original 
         const clone = new PriorityQueue();
         clone.heap = [...this.pq.heap];
+
+         // Drain the clone into a sorted array
         const sorted = [];
         while (!clone.isEmpty()) sorted.push(clone.dequeue());
         return sorted;
     }
 
+    // Get a single task by its ID in O(1) via the hashmap; returns null if not found
     getById(taskId) {
         return this.taskMap[taskId] || null;
     }
 }
 
+// Export a singleton instance of TaskQueue for app-wide use
 export default new TaskQueue();
