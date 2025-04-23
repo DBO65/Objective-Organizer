@@ -3,10 +3,10 @@
   "version": "1.0.0",                // Project Version
   "main": "server.js",               // Entry point when someone `require()`s the package
   "scripts": {
-    // Jest command used to Test.
+                                      // Jest command used to Test.
     "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js --config jest.config.js",
     "start": "node server.js"
-    // “npm start” will run your server
+                                     // “npm start” will run your server
   },
   "type": "module",                  // Enabled native ES module support (`import`/`export`)
   "keywords": [],                    // Search keywords if published to npm
