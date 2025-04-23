@@ -29,7 +29,7 @@ This is the template for Project 3 repositories. It includes all the assignment 
 	- [Step 3: Start the Backend Server](#start-the-backend-server)
 	- [Step 4: Start the Frontend React App](#start-the-frontend-react-app)
 	- [Step 5: Test the API (Optional)](#test-the-api-(optional))
- - [Instructions for Running the Tests](#instructions-for-running-the-tests)
+ - [Instructions for Running the Test Cases](#instructions-for-running-the-test-cases)
 	- [Step 1: Install Jest](#install-jest)
  	- [Step 2: Run the Test Cases](#run-the-test-cases)
 
@@ -256,3 +256,22 @@ webpack compiled successfully
 
 ## Step 5: Test the Backend API (Optional)
 To view backendtask data directly, visit [http://localhost:5000/api/tasks](http://localhost:5000/api/tasks)
+
+# Instructions for Running the Test Cases
+Follow these steps to run the test cases on your machine.
+
+## Install Jest
+You need **Jest** to run the test cases.
+- If you don't already have Jest:
+  1. Open up a terminal.
+  2. Make sure Jest is installed as a **dev** dependency by enterting into the terminal: `npm install --save-dev jest`
+
+## Run the Test Cases
+1. Input into the terminal: `npm test`
+2. You should see output like:
+   PASS tests/performance.test.js
+   Data Structure Capacity and Correctness for 100k Items
+   ✓ PriorityQueue capacity and minimal element check
+   ✓ TaskQueue capacity and lookup performance
+   ✓ Sample sort vs heap order for small subset
+   ✓ Map vs linear search sample lookup
