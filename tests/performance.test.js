@@ -1,4 +1,3 @@
-// tests/performance.test.js
 import PriorityQueue from '../Utility/tasks_priority_queue.js';
 
 describe('Data Structures and Algorithms Test', () => {
