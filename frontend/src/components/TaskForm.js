@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-//handles both adding and editing tasks
 function TaskForm({ onAddTask, onUpdateTask, taskToEdit }) {
-  //form field states
   const [title, setTitle] = useState('');
   const [priority, setPriority] = useState(1);
   const [deadline, setDeadline] = useState('');
@@ -12,19 +10,17 @@ function TaskForm({ onAddTask, onUpdateTask, taskToEdit }) {
   const [completed, setCompleted] = useState(false);
   const [taskId, setTaskId] = useState('');
 
-  //whenever taskToEdit changes, populate the form with its data (edit mode)
   useEffect(() => {
     if (taskToEdit) {
       setTaskId(taskToEdit.Task_ID);
       setTitle(taskToEdit.Task_Name);
       setPriority(taskToEdit.Priority_Level);
-      setDeadline(taskToEdit.Deadline?.slice(0, 10) || '');  //format as yyyy-mm-dd
-      setAssigned(taskToEdit.Date_Assigned?.slice(0, 10) || ''); //format at yyyy-mm-dd
+      setDeadline(taskToEdit.Deadline?.slice(0, 10) || '');
+      setAssigned(taskToEdit.Date_Assigned?.slice(0, 10) || '');
       setConstraints(taskToEdit.Task_Constraints || '');
       setSubtaskCount(taskToEdit.Subtask || 0);
       setCompleted(taskToEdit.Completion_Status || false);
     } else {
-      //clear the form if no task is selected for editing
       setTaskId('');
       setTitle('');
       setPriority(1);
@@ -36,9 +32,8 @@ function TaskForm({ onAddTask, onUpdateTask, taskToEdit }) {
     }
   }, [taskToEdit]);
 
-  //handles form submission for both add and update operations
   const handleSubmit = (e) => {
-    e.preventDefault();  //prevent page reload
+    e.preventDefault();
     const taskData = {
       Task_ID: Number(taskId),
       Task_Name: title,
@@ -48,7 +43,7 @@ function TaskForm({ onAddTask, onUpdateTask, taskToEdit }) {
       Task_Constraints: constraints,
       Subtask: Number(subtaskCount),
       Completion_Status: completed,
-      ...(taskToEdit && { _id: taskToEdit._id }),  //include Mondo_id if updating
+      ...(taskToEdit && { _id: taskToEdit._id }),
     };
     taskToEdit ? onUpdateTask(taskData) : onAddTask(taskData);
   };
@@ -67,12 +62,10 @@ function TaskForm({ onAddTask, onUpdateTask, taskToEdit }) {
         boxShadow: '0 2px 4px rgba(0,0,0,0.05)',
       }}
     >
-{/* Task Title */}
       <label>Task Title:
         <input value={title} onChange={(e) => setTitle(e.target.value)} required />
       </label>
 
-      {/* Priority Dropdown */}
       <label>Priority Level:
         <select value={priority} onChange={(e) => setPriority(Number(e.target.value))}>
           {Array.from({ length: 10 }, (_, i) => (
@@ -81,37 +74,30 @@ function TaskForm({ onAddTask, onUpdateTask, taskToEdit }) {
         </select>
       </label>
 
-      {/* Deadline Date Picker */}
       <label>Deadline:
         <input type="date" value={deadline} onChange={(e) => setDeadline(e.target.value)} required />
       </label>
 
-      {/* Assigned Date Picker */}
       <label>Date Assigned:
         <input type="date" value={assigned} onChange={(e) => setAssigned(e.target.value)} required />
       </label>
 
-      {/* Constraints Text Input */}
       <label>Task Constraints:
         <input value={constraints} onChange={(e) => setConstraints(e.target.value)} />
       </label>
 
-      {/* Subtask Count Input */}
       <label>Subtask Count:
         <input type="number" value={subtaskCount} onChange={(e) => setSubtaskCount(Number(e.target.value))} min="0" />
       </label>
 
-      {/* Task ID Input */}
       <label>Task ID:
         <input type="number" value={taskId} onChange={(e) => setTaskId(Number(e.target.value))} required />
       </label>
 
-      {/* Completion Status Checkbox */}
       <label>Completed:
         <input type="checkbox" checked={completed} onChange={(e) => setCompleted(e.target.checked)} />
       </label>
 
-      {/* Submit Button */}
       <button
         type="submit"
         style={{
